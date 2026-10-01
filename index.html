@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Split the Bill</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>Split the bill</h1>
+
+<section class="card">
+  <label for="rest">Restaurant</label>
+  <input id="rest" type="text" maxlength="50" placeholder="Restaurant name">
+  <label for="pname">Who's eating</label>
+  <div class="row">
+    <input id="pname" type="text" maxlength="30" placeholder="Add a name">
+    <button class="go" id="padd" type="button">Add</button>
+  </div>
+  <div id="friends" class="chips2"></div>
+  <div id="people" class="chips2"></div>
+</section>
+
+<section class="card gap">
+  <div class="tabs" id="tabs">
+    <button type="button" data-m="item" aria-pressed="true">By dish</button>
+    <button type="button" data-m="whole" aria-pressed="false">Split equally</button>
+  </div>
+
+  <div id="whole" hidden>
+    <label for="bill">Total bill (before tip)</label>
+    <input id="bill" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00">
+    <div class="hint">Everyone pays the same share.</div>
+  </div>
+
+  <div id="byitem">
+    <div class="hint">Add each dish with its price. Everyone is ticked by default; untick anyone who didn't have it.</div>
+    <div id="items"></div>
+    <button class="ghostbtn" id="additem" type="button">+ Add dish</button>
+  </div>
+</section>
+
+<section class="card gap">
+  <label>Tip</label>
+  <div class="chips" id="tips">
+    <button type="button" data-t="5" aria-pressed="false">5%</button>
+    <button type="button" data-t="10" aria-pressed="true">10%</button>
+    <button type="button" data-t="15" aria-pressed="false">15%</button>
+    <button type="button" data-t="20" aria-pressed="false">20%</button>
+  </div>
+  <div class="row">
+    <div>
+      <label for="cur">Currency</label>
+      <select id="cur"><option>₹</option><option>$</option><option>€</option><option>£</option></select>
+    </div>
+    <div>
+      <label for="round">Round each share</label>
+      <select id="round">
+        <option value="0">Exact</option>
+        <option value="1">Up to 1</option>
+        <option value="10">Up to 10</option>
+        <option value="50">Up to 50</option>
+      </select>
+    </div>
+  </div>
+  <div id="upiBox" class="upi-box">
+    <label for="upi">Your UPI ID (optional, adds Pay buttons)</label>
+    <input id="upi" type="text" placeholder="name@bank" autocapitalize="off" autocomplete="off">
+  </div>
+  <div class="err" id="err" role="alert"></div>
+</section>
+
+<section class="result" id="res" hidden aria-live="polite">
+  <div class="big" id="big"></div>
+  <div class="sub" id="sub"></div>
+  <div class="people" id="ppl"></div>
+</section>
+
+<div class="acts" id="acts" hidden>
+  <button class="go" id="save" type="button">Save split</button>
+  <button class="ghostbtn" id="copy" type="button">Copy summary</button>
+  <a class="ghostbtn" id="wa" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<h2>Previous splits</h2>
+<div class="hint" id="month"></div>
+<section class="card" id="hist"></section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
