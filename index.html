@@ -45,26 +45,30 @@
 <section class="card gap">
   <label>Tip</label>
   <div class="chips" id="tips">
+    <button type="button" data-t="0" aria-pressed="false">0%</button>
     <button type="button" data-t="5" aria-pressed="false">5%</button>
     <button type="button" data-t="10" aria-pressed="true">10%</button>
     <button type="button" data-t="15" aria-pressed="false">15%</button>
     <button type="button" data-t="20" aria-pressed="false">20%</button>
   </div>
+  <label for="ctip">Or type your own tip %</label>
+  <input id="ctip" type="number" inputmode="decimal" min="0" max="100" step="0.5" placeholder="e.g. 7.5">
   <div class="row">
     <div>
       <label for="cur">Currency</label>
       <select id="cur"><option>₹</option><option>$</option><option>€</option><option>£</option></select>
     </div>
     <div>
-      <label for="round">Round each share</label>
+      <label for="round">Round up each share</label>
       <select id="round">
-        <option value="0">Exact</option>
+        <option value="0">No rounding</option>
         <option value="1">Up to 1</option>
         <option value="10">Up to 10</option>
         <option value="50">Up to 50</option>
       </select>
     </div>
   </div>
+  <div class="hint">Rounding makes each amount a round number (437.20 becomes 440). The extra goes to the tip.</div>
   <div id="upiBox" class="upi-box">
     <label for="upi">Your UPI ID (optional, adds Pay buttons)</label>
     <input id="upi" type="text" placeholder="name@bank" autocapitalize="off" autocomplete="off">

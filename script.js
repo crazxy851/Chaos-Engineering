@@ -84,10 +84,15 @@
     Array.prototype.forEach.call($("tabs").children, function (b) { b.setAttribute("aria-pressed", b.dataset.m === S.mode); });
   }
   function drawAll() { drawPeople(); drawItems(); drawMode(); calc(); }
+  function pressChips() {
+    var custom = $("ctip").value !== "";
+    Array.prototype.forEach.call($("tips").children, function (b) { b.setAttribute("aria-pressed", !custom && +b.dataset.t === S.tip); });
+  }
   function setForm() {
     $("rest").value = S.rest; $("bill").value = S.bill; $("cur").value = S.cur;
     $("round").value = S.round; $("upi").value = S.upi; $("upiBox").hidden = S.cur !== "₹";
-    Array.prototype.forEach.call($("tips").children, function (b) { b.setAttribute("aria-pressed", +b.dataset.t === S.tip); });
+    $("ctip").value = [0, 5, 10, 15, 20].indexOf(S.tip) < 0 ? S.tip : "";
+    pressChips();
   }
 
   /* ---------- the maths (all in cents) ---------- */
@@ -175,6 +180,11 @@
   $("tips").onclick = function (e) {
     var b = e.target.closest("button"); if (!b) return;
     S.tip = +b.dataset.t; setForm(); calc();
+  };
+  $("ctip").oninput = function (e) {
+    var v = parseFloat(e.target.value);
+    if (!isNaN(v)) S.tip = Math.min(100, Math.max(0, v));
+    pressChips(); calc();
   };
   $("cur").onchange = function (e) { S.cur = e.target.value; $("upiBox").hidden = S.cur !== "₹"; drawHist(); calc(); };
   $("round").onchange = function (e) { S.round = +e.target.value; calc(); };
